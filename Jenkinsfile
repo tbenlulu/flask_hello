@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh '''python3 run.py &
+        sh '''python3 flask_hello/run.py &
 
 '''
         sh 'curl -f -L http://localhost:5555/'
