@@ -10,15 +10,21 @@ pipeline {
       steps {
         sh 'git clone https://github.com/tbenlulu/flask_hello.git'
         sh 'pip3 install -r flask_hello/requirements.txt'
-        sh '''python3 flask_hello/run.py &
-
-
-
-
-
-
-
-&& / curl -f -L http://localhost:5555/'''
+      }
+    }
+    stage('Test') {
+      steps {
+        parallel(
+          "Test": {
+            sh '''python3 flask_hello/run.py &
+'''
+            
+          },
+          "": {
+            sh 'curl -f -L http://localhost:5555/'
+            
+          }
+        )
       }
     }
   }
