@@ -14,17 +14,9 @@ pipeline {
     }
     stage('Test') {
       steps {
-        parallel(
-          "Test": {
-            sh '''python3 flask_hello/run.py &
+        sh '''python3 flask_hello/run.py &
 '''
-            
-          },
-          "": {
-            sh 'curl -f -L http://localhost:5555/'
-            
-          }
-        )
+        sh 'curl -f -L http://localhost:5555/'
       }
     }
   }
