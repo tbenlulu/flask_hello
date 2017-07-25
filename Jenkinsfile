@@ -8,7 +8,6 @@ pipeline {
   stages {
     stage('error') {
       steps {
-        sh 'git clone https://github.com/tbenlulu/flask_hello.git'
         sh 'pip3 install -r flask_hello/requirements.txt'
       }
     }
