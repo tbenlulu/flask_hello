@@ -1,24 +1,12 @@
-pipeline {
-  agent {
-    node {
-      label 'docker-slave'
-    }
-    
-  }
-  stages {
-    stage('error') {
-      steps {
-        sh 'git clone https://github.com/tbenlulu/flask_hello.git'
-        sh 'pip3 install -r flask_hello/requirements.txt'
-      }
-    }
-    stage('Test') {
-      steps {
-        sh '''python3 flask_hello/run.py &
-'''
-        sh '''curl -f -I http://localhost:5555/
-'''
-      }
-    }
-  }
-}
+FROM python:3.5.3-alpine
+
+COPY flask_hello /flask_hello
+
+WORKDIR /falsk_hello
+
+RUN pip3 install -r requirements.txt
+	
+EXPOSE 5555
+
+CMD ["python","run.py"]
+
